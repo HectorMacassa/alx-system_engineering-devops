@@ -9,3 +9,4 @@
 8-james bond - this script gives the owner and group no permission,the user gets all permission
 9-john_doe - this scrip gives the following permissions -rwxr-x-wx
 10-mirror_permissions - this script that mirrors the mode of the source file
+11-directories_permission - this script changes the permissins of sub directories in the current directory
