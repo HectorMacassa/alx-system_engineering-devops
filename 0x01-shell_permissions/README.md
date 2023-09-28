@@ -5,4 +5,4 @@
 4-empty - this script creates an empty file hello
 5-execute - this script adds execute permission to the owner of the file
 6-multiple_permissions - this script gives the owner and gourp execute permissions
-
+7-everybody - this script gives everyone execution permission
