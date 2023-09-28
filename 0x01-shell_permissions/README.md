@@ -11,3 +11,4 @@
 10-mirror_permissions - this script that mirrors the mode of the source file
 11-directories_permission - this script changes the permissins of sub directories in the current directory
 12-directory_permissions - this script creates a new directory and gives it 751 permissions
+13-change_group - this script changes the group ownership of the file hello
