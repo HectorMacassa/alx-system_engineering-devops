@@ -7,3 +7,4 @@
 6-multiple_permissions - this script gives the owner and gourp execute permissions
 7-everybody - this script gives everyone execution permission
 8-james bond - this script gives the owner and group no permission,the user gets all permission
+9-john_doe - this scrip gives the following permissions -rwxr-x-wx
