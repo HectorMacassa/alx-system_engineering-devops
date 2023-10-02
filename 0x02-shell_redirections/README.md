@@ -15,5 +15,5 @@
 14-findthatword - this script searches for the pattern "root" in /etc/passwd
 15-countthatword - this script counts the number of lines that contain the pattern “bin” in the file /etc/passwd
 16-whatsnext - this script displays lines containing the pattern “root” and 3 lines after them in the file /etc/passwd.
-
+17-hidethisword - this script displays all the lines in the file /etc/passwd that do not contain the pattern “bin”.
 
