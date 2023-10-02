@@ -8,3 +8,4 @@
 7-file - This scripts creates a new file and ends text
 8-cwd_state - This script writes into the file ls_cwd_content the result of the command ls -la
 9-duplicate_last_line - this script duplicates the last line of a file
+10-no_more_js - this scripts all javascript files
