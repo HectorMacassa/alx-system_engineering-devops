@@ -11,3 +11,4 @@
 10-no_more_js - this scripts all javascript files
 11-directories - this script counts directories and subdirectories in the cwd
 12-newest_files - this script displays the 10 newest files in the directory
+13-unique - this script takes a list of words as input and prints only words that appear exactly once
