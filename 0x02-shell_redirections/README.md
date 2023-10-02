@@ -5,3 +5,4 @@
 4-lastlines - This script prints the last 10 lines of /etc/passwd
 5-firstlines - This script prints the first 10 lines of /etc/passwd
 6-third_line - This script prints the 3rd line in the file iacta
+7-file - This scripts creates a new file and ends text
