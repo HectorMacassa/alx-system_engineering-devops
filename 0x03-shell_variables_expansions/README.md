@@ -9,3 +9,4 @@
 8-true_knowledge - this script prints the addition of 128 to a stored variable
 9-divide_and_rule - this script prints the result of POWER divided by DIVIDE
 10-love_exponent_breath - this script prints the result of BREATH to the power of LOVE
+11-binary_to_decimal - this script converts a number from base 2 to base 10
