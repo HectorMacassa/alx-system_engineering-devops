@@ -4,3 +4,4 @@
 3-paths - 
 4-global_variables - this script prints environment variables
 5-local_variables - this script prints all local variables and environments
+6-create_local_variable - this script creates a local variable
