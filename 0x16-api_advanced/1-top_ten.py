@@ -11,7 +11,7 @@ def top_ten(subreddit):
    If the subreddit is invalid, prints None.
    """
    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10"
-   headers = {"User-Agent": "My Reddit Top 10 Viewer"}
+   headers = {"User-Agent": "Mozilla/5.0"}
 
    try:
        response = requests.get(url, headers=headers, allow_redirects=False)
