@@ -8,6 +8,7 @@ for a given subreddit using the Reddit API.
 import requests
 from requests.exceptions import RequestException
 
+
 def number_of_subscribers(subreddit):
     """
     Return the total number of subscribers on a subreddit.
