@@ -5,6 +5,7 @@ from a given subreddit on Reddit and print a sorted count of given keywords.
 import re
 import requests
 
+
 def count_words(subreddit, word_list, word_count=None, after=None):
     """
     Recursively fetches hot article titles from a given subreddit,
@@ -31,7 +32,7 @@ def count_words(subreddit, word_list, word_count=None, after=None):
 
     try:
         response = requests.get(url, params=params,
-                                 headers={"User-Agent": "mozilla/5.0"})
+                                headers={"User-Agent": "mozilla/5.0"})
         response.raise_for_status()
     except requests.exceptions.HTTPError:
         return
@@ -58,6 +59,7 @@ def count_words(subreddit, word_list, word_count=None, after=None):
     else:
         print_word_count(word_count)
 
+
 def print_word_count(word_count):
     """
     Prints the sorted word count.
@@ -66,8 +68,8 @@ def print_word_count(word_count):
         word_count (dict): A dictionary containing the keyword counts.
     """
     sorted_words = sorted((count, word)
-                           for word, count in word_count.items()
-                           if count > 0)
+                          for word, count in word_count.items()
+                          if count > 0)
     sorted_words.sort(key=lambda x: (-x[0], x[1]))
 
     for count, word in sorted_words:
