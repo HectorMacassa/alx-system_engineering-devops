@@ -1,5 +1,0 @@
-# SSH configuration file
-Host *
-    IdentityFile ~/.ssh/school
-    PreferredAuthentications publickey
-    PasswordAuthentication no
