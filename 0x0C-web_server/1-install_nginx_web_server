@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# A Bash script that installs nginx and ensures it is listening on port 80
+
+sudo apt update
+sudo apt install -y nginx
+
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+sudo service nginx restart
+
+curl -I localhost
