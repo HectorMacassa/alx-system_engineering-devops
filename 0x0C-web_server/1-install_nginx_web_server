@@ -1,13 +1,32 @@
 #!/usr/bin/env bash
 # A Bash script that installs nginx and ensures it is listening on port 80
 
-sudo apt update
-sudo apt install -y nginx
+sudo apt-get update
+
+sudo apt-get install -y nginx
 
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
-sudo ufw allow "Nginx HTTP"
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak 2>/dev/null
 
-sudo service nginx restart
+sudo bash -c 'cat > /etc/nginx/sites-available/default << EOL
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+    server_name _;
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOL'
 
-curl -I localhost
+sudo service nginx start
+
+if ! pgrep nginx > /dev/null
+then
+    sudo service nginx restart
+fi
+
+sudo ufw allow 'Nginx HTTP' 2>/dev/null
