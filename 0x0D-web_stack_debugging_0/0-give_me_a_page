@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Get Apache to run on the container and to return a page containing Hello ALX when querying the root of it.
+
+sudo apt-get update -y
+sudo apt-get install -y apache2
+
+sudo /etc/init.d/apache2 start
+
+echo "Hello Holberton" | sudo tee -a /var/www/html/index.html
+
+sudo /etc/init.d/apache2 restart
