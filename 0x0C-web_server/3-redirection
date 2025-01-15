@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# A Bash script containing commands to automatically configure a Ubuntu machine
+
+sudo apt update
+sudo apt install -y nginx
+
+sudo service nginx start
+
+sudo sed -i '/server {/a \ \ \ \ location /redirect_me {\n\ \ \ \ \ \ \ \ return 301 https://www.example.com/;\n\ \ \ \ }' /etc/nginx/sites-available/default
+
+sudo service nginx restart
