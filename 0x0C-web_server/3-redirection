@@ -1,11 +1,29 @@
 #!/usr/bin/env bash
-# A Bash script containing commands to automatically configure a Ubuntu machine
+# A Bash script to install nginx and configure a 301 permanent redirect
 
-sudo apt update
-sudo apt install -y nginx
+sudo apt-get update
+sudo apt-get install -y nginx
 
-sudo service nginx start
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-sudo sed -i '/server {/a \ \ \ \ location /redirect_me {\n\ \ \ \ \ \ \ \ return 301 https://www.example.com/;\n\ \ \ \ }' /etc/nginx/sites-available/default
+sudo bash -c 'cat > /etc/nginx/sites-available/default << EOL
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+    server_name _;
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOL'
 
 sudo service nginx restart
+
+sudo ufw allow 'Nginx HTTP' 2>/dev/null
