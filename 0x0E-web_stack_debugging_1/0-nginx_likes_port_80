@@ -3,7 +3,7 @@
 sudo apt-get update -y
 sudo apt-get install -y nginx
 
-sudo sed -i 's/^listen .*/listen 80 default_server;/'
+sudo sed -i 's/^listen .*/listen 80 default_server;/' /etc/nginx/sites-available/default
 
 sudo systemcl enable nginx
 sudo systemcl start nginx
