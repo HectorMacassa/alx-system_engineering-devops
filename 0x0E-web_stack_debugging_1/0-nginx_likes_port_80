@@ -2,5 +2,5 @@
 # A Bash script that configures a server Nginx to be running, and listening on port 80 of all the server’s active IPv4 IPs
 sudo apt-get update -y
 sudo apt-get install -y nginx
-sudo service nginx enable
-sudo service nginx start
+sudo systemcl enable nginx
+sudo systemcl start nginx
