@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# Script for setting up Nginx web server
+
+set -e  # Exit immediately if a command exits with a non-zero status.
+
+LOG_FILE="/var/log/setup_nginx.log"
+exec > >(tee -a "$LOG_FILE") 2>&1  # Log all output to a file for debugging.
+
+WEB_ROOT="/var/www/html"
+NGINX_CONF="/etc/nginx/sites-enabled/default"
+
+echo -e "Updating system and performing checks...\n"
+
+# Function to install a package if not already installed
+function install() {
+    if ! command -v "$1" &> /dev/null; then
+        echo "Installing: $1"
+        sudo apt-get update -y -qq && sudo apt-get install -y "$1" -qq
+    else
+        echo "$1 is already installed."
+    fi
+}
+
+# Install Nginx
+install nginx
+
+# Configure firewall rules if UFW is active
+if sudo ufw status | grep -qw "active"; then
+    echo "Allowing Nginx HTTP through the firewall..."
+    sudo ufw allow 'Nginx HTTP'
+else
+    echo "UFW is not active; skipping firewall configuration."
+fi
+
+echo -e "\nSetting up directories and permissions...\n"
+
+# Create web root directory and set ownership/permissions
+sudo mkdir -p "$WEB_ROOT"
+sudo chown -R "$USER":"$USER" /var/www
+sudo chmod -R 755 /var/www
+
+# Create default index.html and error_404.html files
+echo "Hello World!" > "$WEB_ROOT/index.html"
+echo "Ceci n'est pas une page" > "$WEB_ROOT/error_404.html"
+
+# Backup existing Nginx configuration
+BACKUP_FILE="/etc/nginx/sites-enabled/nginx_default_$(date +%F-%T).backup"
+sudo cp "$NGINX_CONF" "$BACKUP_FILE"
+echo "Backup of Nginx configuration saved to $BACKUP_FILE."
+
+# Write new Nginx configuration
+cat <<EOF | sudo tee "$NGINX_CONF"
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root $WEB_ROOT;
+    index index.html index.htm index.nginx-debian.html;
+    server_name _;
+    add_header X-Served-By \$hostname;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    if (\$request_filename ~ redirect_me) {
+        rewrite ^ https://example.com/ permanent;
+    }
+
+    error_page 404 /error_404.html;
+    location = /error_404.html {
+        internal;
+    }
+}
+EOF
+
+
+# Restart Nginx service if running, otherwise start it
+if ! pgrep -x "nginx" > /dev/null; then
+    echo "Starting Nginx..."
+    sudo service nginx start
+else
+    echo "Restarting Nginx..."
+    sudo service nginx restart
+fi
+
