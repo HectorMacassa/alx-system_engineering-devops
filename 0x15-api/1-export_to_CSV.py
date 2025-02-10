@@ -13,9 +13,9 @@ The script will:
     - Display TODO progress on stdout
     - Create a CSV file named USER_ID.csv with all tasks
 """
+import csv
 import requests
 import sys
-import csv
 
 
 def export_todo_data(employee_id):
