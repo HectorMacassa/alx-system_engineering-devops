@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 """
-Script that retrieves and displays an employee's TODO list progress using REST API.
+Script that retrieves and displays an employee's TODO list progress using
+REST API.
 
-This module makes HTTP requests to fetch employee information and their TODO items,
+This module makes HTTP requests to fetch employee information and their
+TODO items,
 then displays their progress in a formatted output.
 
 Usage:
@@ -40,7 +42,7 @@ def get_employee_todo_progress(employee_id):
     # Get todos for the employee
     todos_response = requests.get(f"{base_url}/users/{employee_id}/todos")
     if todos_response.status_code != 200:
-        print(f"Error: Could not fetch TODOs for employee with ID {employee_id}")
+        print(f"Error: Could not fetch for employee with ID {employee_id}")
         sys.exit(1)
 
     todos = todos_response.json()
